@@ -19,12 +19,13 @@ Route::get('/', function () {
 Route::get('XXX','AAAcontroller@bbb');
 
 
-Route::group(['prefix' => 'admin'], function(){
-  Route::get('news/create','Admin\NewsController@add')->middleware('auth');
-  //PHP_lalavel_10　課題4
-  Route::get('profile/create','Admin\ProfileController@add')->middleware('auth');
-  Route::get('profile/edit','Admin\ProfileController@edit')->middleware('auth');
-
+Route::group(['prefix' => 'admin','middleware' => 'auth'], function() {
+  Route::get('news/create','Admin\NewsController@add');
+  Route::post('news/create','Admin\NewsController@create');#追記１４
+  Route::get('profile/create','Admin\ProfileController@add');
+  Route::post('profile/create','Admin\ProfileController@create');#課題14-3
+  Route::get('profile/edit','Admin\ProfileController@edit');
+  Route::post('profile/edit','Admin\ProfileController@update');#課題14−６
 });
 
 Auth::routes();

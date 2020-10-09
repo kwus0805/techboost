@@ -22,7 +22,7 @@
 
 <!-- Styles -->
     {{-- Lalavel標準で用意されているCSSを読み込みます --}}
-    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{-- この章の後半で作成するCSSを読み込みます --}}
     <link href="{{ asset('css/admin.css') }}" rel="stylesheet">
   </head>
@@ -44,8 +44,8 @@
               <ul class="navbar-nav mr-auto"></ul>
 
               <!-- Right Side Of Navbar -->
-              <ul class="navbar-nav ml-auto"></ul>
-              {{-- 以下を追記(lalavel_13 課題1 --)}}
+              <ul class="navbar-nav ml-auto">
+              {{-- 以下を追記（lalavel_13) --}}
               <!-- Authentication Links -->
               {{-- ログインしていなかったらログイン画面へのリンクを表示 --}}
               @guest
@@ -67,7 +67,8 @@
                     </div>
                   </li>
                   @endguest
-                  {{-- 以上までを追記(lalavel_13 課題1) --}}
+                  {{-- 以上までを追記(lalavel_13) --}}
+              </ul>
 
             </div>
           </div>
