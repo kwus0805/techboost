@@ -14,21 +14,7 @@ class ProfileController extends Controller
     {
       return view('admin.profile.create');
     }
-    public function create()
-    {
-      return redirect('admin/profile/create');
-    }
-    public function edit()
-    {
-      return view('admin.profile.edit');
-    }
-    public function update()
-    {
-      return redirect('admin/profile/edit');
-    }
-
-    // lalavel_15_課題5
-    public function create (Request $request)
+    public function create(Request $request)
     {
       //Validation　を行う
       $this->validate($request, Profile::$rules);
@@ -46,8 +32,34 @@ class ProfileController extends Controller
       return redirect('admin/profile/create');
     }
 
+    public function edit(Request $request)
+    {
+      //lalavel_17_課題1
+      $profile = Profile::find($request->id);
+      if(empty($profile)) {
+        abort(404);
+      }
+      return view('admin.profile.edit',['profile_form' => $profile]);
+    }
+    public function update(Request $request)
+    {
+      $this->validate($request, Profile::$rules);
+      $profile = Profile::find($request->id);
+      $profile_form = $request->all();
 
+        unset($profile_form['_token']);
+        unset($profile_form['remove']);
 
+        $profile->fill($profile_form)->save();
+        return redirect('admin/profile/edit');
+      }
+
+      public function delete(Request $request)
+      {
+        $profile = Profile::find($request->id);
+        $profile->delete();
+        return redirect('admin/profile/edit');
+      }
 
 
 }
