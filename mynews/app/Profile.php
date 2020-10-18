@@ -16,4 +16,11 @@ class Profile extends Model
       'introduction' =>'required',
 
     );
+
+    //以下を追記(lalavel_18_課題)
+    public function histories()
+    {
+      return $this->hasMany('App\ProfileHistory');
+    }
+
 }

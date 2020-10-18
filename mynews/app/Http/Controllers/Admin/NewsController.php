@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\News;
 
+use App\History; #lalavel_18追記
+use Carbon\carbon; #lalavel_18追記
+
 
 //以下を追記することでNews Modelが扱えるようになる(lalavel_15)
 class NewsController extends Controller
@@ -91,6 +94,13 @@ class NewsController extends Controller
 
      //該当するデータを上書きして保存する
      $news->fill($news_form)->save();
+
+     //以下を追記（lalavel_18)
+     $history = new History;
+     $history->news_id = $news->id;
+     $history->edited_at = Carbon::now();
+     $history->save();
+
 
      return redirect('admin/news/');
    }
